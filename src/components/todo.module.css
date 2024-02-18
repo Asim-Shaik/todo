@@ -1,4 +1,4 @@
-.task {
+.todo {
   /* width: 100vw; */
   background: #f2f2f2;
   color: black;
@@ -12,18 +12,18 @@
   position: relative;
 }
 
-.task:not(:first-child) {
+.todo:not(:first-child) {
   margin-top: 12px; /* Adjust the margin value as needed */
 }
 
-.task p {
+.todo p {
   font-size: 14px;
   line-height: 19px;
   /* color: #f2f2f2; */
   margin-right: auto;
 }
 
-.taskBody {
+.todoBody {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,18 +40,27 @@ p.textCompleted {
 }
 
 .checkContainer {
-  width: 40px;
-  height: 25px;
+  width: 70px;
+  height: 50px;
   background: none;
   border: none;
   /* background-color: red; */
 }
 
-.checkContainer div {
-  width: 100%;
-  height: 100%;
-  border-radius: 999px;
-  border: 2px solid #4ea8de;
+/* Media query for screens smaller than 768px */
+@media only screen and (max-width: 768px) {
+  .checkContainer {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Media query for screens smaller than 480px */
+@media only screen and (max-width: 480px) {
+  .checkContainer {
+    width: 70%;
+    height: 70%;
+  }
 }
 
 .checkContainer svg {
