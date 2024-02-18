@@ -6,7 +6,7 @@ const Todo = ({ todo, onView, onComplete }) => {
     <div className={styles.task}>
       <button
         className={styles.checkContainer}
-        onClick={() => onComplete(todo._id)}
+        onClick={() => onComplete(todo._id, !todo.completed)}
       >
         {todo.completed ? <BsFillCheckCircleFill /> : <div />}
       </button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DeleteTodo, GetTodoData, GetTodos } from "../rest/todo";
+import { DeleteTodo, EditTodo, GetTodoData, GetTodos } from "../rest/todo";
 import Todo from "../components/Todo";
 import "./todoList.css"; // Import the CSS file
 
@@ -29,12 +29,26 @@ const TodoList = () => {
     console.log(response.data.todo);
   };
 
+  const onComplete = async (id: string, complete: boolean) => {
+    const payload = {
+      completed: complete,
+    };
+    await EditTodo(payload, id);
+    const response = await GetTodos();
+    setTodos(response.data.todos);
+  };
+
   return (
     <div className="todo-list-container">
       <h1>TODO LIST</h1>
       <div className="todo-list">
         {todos.map((todo) => (
-          <Todo key={todo._id} todo={todo} onView={onView} />
+          <Todo
+            key={todo._id}
+            todo={todo}
+            onView={onView}
+            onComplete={onComplete}
+          />
         ))}
       </div>
       <div className="button-container">

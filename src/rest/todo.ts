@@ -30,7 +30,7 @@ export const EditTodo = async (
   payload: Partial<Todo>,
   id: string
 ): Promise<AxiosResponse<Todo>> => {
-  const url = `/todos${id}`;
+  const url = `/todos/${id}`;
   return await axiosInstance.patch<Todo>(url, payload);
 };
 
