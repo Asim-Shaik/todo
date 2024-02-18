@@ -1,5 +1,4 @@
 .todo {
-  /* width: 100vw; */
   background: #f2f2f2;
   color: black;
   border: 1px solid #333333;
@@ -13,13 +12,13 @@
 }
 
 .todo:not(:first-child) {
-  margin-top: 12px; /* Adjust the margin value as needed */
+  margin-top: 12px;
 }
 
 .todo p {
   font-size: 14px;
   line-height: 19px;
-  /* color: #f2f2f2; */
+
   margin-right: auto;
 }
 
@@ -30,7 +29,7 @@
   flex-direction: column;
   margin-left: 20px;
   text-transform: capitalize;
-  /* background-color: white; */
+
   width: 100%;
 }
 
@@ -47,7 +46,6 @@ p.textCompleted {
   /* background-color: red; */
 }
 
-/* Media query for screens smaller than 768px */
 @media only screen and (max-width: 768px) {
   .checkContainer {
     width: 100%;
@@ -55,7 +53,6 @@ p.textCompleted {
   }
 }
 
-/* Media query for screens smaller than 480px */
 @media only screen and (max-width: 480px) {
   .checkContainer {
     width: 70%;

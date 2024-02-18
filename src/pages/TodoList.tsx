@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AddTodo, EditTodo, GetTodoData, GetTodos } from "../rest/todo";
 import Todo from "../components/Todo";
-import "./todoList.css"; // Import the CSS file
+import "./todoList.css";
 import AddOrEditTodo from "../components/AddOrEditTodo/AddOrEditTodo";
 
 const TodoList = () => {
@@ -14,7 +14,9 @@ const TodoList = () => {
     desc: "",
     completed: false,
   });
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterCompleted, setFilterCompleted] = useState("all");
+  const [sortByCompleted, setSortByCompleted] = useState(false);
   useEffect(() => {
     const getList = async () => {
       try {
@@ -27,14 +29,8 @@ const TodoList = () => {
     getList();
   }, []);
 
-  // const onDelete = async (id: string) => {
-  //   await DeleteTodo(id);
-  //   const response = await GetTodos();
-  //   setTodos(response.data.todos);
-  // };
-
   const handleClickInside = (e) => {
-    e.stopPropagation(); // Prevent click event propagation
+    e.stopPropagation();
   };
 
   const onAdd = async (title: string, desc: string, completed: boolean) => {
@@ -75,13 +71,61 @@ const TodoList = () => {
     setTodos(response.data.todos);
   };
 
+  const filteredTodos = todos
+    .filter(
+      (todo) =>
+        (filterCompleted === "all" ||
+          todo.completed === (filterCompleted === "completed")) &&
+        todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortByCompleted) {
+        return a.completed - b.completed;
+      } else {
+        return a.title.localeCompare(b.title);
+      }
+    });
+
   return (
     <div className="todo-list-container">
       <h1>
         TODO <span className="blue">LIST</span>
       </h1>
+      <div className="wnakers">
+        <div>
+          <input
+            type="text"
+            placeholder="Search by title"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search"
+          />
+        </div>
+        <div>
+          <select
+            value={filterCompleted}
+            onChange={(e) => setFilterCompleted(e.target.value)}
+            className="filter-dropdown"
+          >
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="incomplete">Incomplete</option>
+          </select>
+        </div>
+        <div>
+          <label className="sort-label">
+            <input
+              type="checkbox"
+              checked={sortByCompleted}
+              className="sort-checkbox"
+              onChange={(e) => setSortByCompleted(e.target.checked)}
+            />
+            Sort by status
+          </label>
+        </div>
+      </div>
       <div className="todo-list">
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <Todo
             key={todo._id}
             todo={todo}

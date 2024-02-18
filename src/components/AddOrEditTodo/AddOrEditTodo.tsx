@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import "./addOrEdit.css";
-import {
-  BsFillCheckCircleFill,
-  BsCheck2Circle,
-  BsCheckCircle,
-} from "react-icons/bs";
+import { BsFillCheckCircleFill, BsCheckCircle } from "react-icons/bs";
 
 const AddOrEditTodo = ({ onAdd, mode, data }) => {
   const [title, setTitle] = useState("");
@@ -18,7 +14,7 @@ const AddOrEditTodo = ({ onAdd, mode, data }) => {
   }, [data]);
 
   const handleClickInside = (e) => {
-    e.stopPropagation(); // Prevent click event propagation
+    e.stopPropagation();
   };
 
   const handleTitleChange = (e) => {
@@ -64,10 +60,13 @@ const AddOrEditTodo = ({ onAdd, mode, data }) => {
         <button type="button" onClick={handleSubmit}>
           {mode} Todo
         </button>
-
-        <button type="button" className="delete" onClick={handleSubmit}>
-          Delete Todo
-        </button>
+        {mode === "edit" ? (
+          <button type="button" className="delete" onClick={handleSubmit}>
+            Delete Todo
+          </button>
+        ) : (
+          <></>
+        )}
       </form>
     </div>
   );

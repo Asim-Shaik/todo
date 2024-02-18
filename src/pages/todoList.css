@@ -1,5 +1,4 @@
 .todo-list-container {
-  /* background-color: red; */
   position: relative;
   display: flex;
   justify-content: center;
@@ -8,11 +7,9 @@
 }
 
 .todo-list {
-  /* background-color: blue; */
   width: 70%;
 }
-/* .button-container {
-} */
+
 .add-button {
   position: fixed;
   width: 10rem;
@@ -38,7 +35,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,13 +44,12 @@
 .modal {
   background-color: white;
   border-radius: 8px;
-  padding: 40px; /* Increased padding */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Increased shadow */
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   position: relative;
   width: 80%;
   max-width: 90%;
   overflow: auto;
-  /* height: 200px; */
 }
 
 @media screen and (min-width: 556px) {
@@ -71,4 +67,39 @@
 
 .blue {
   color: #007bff;
+}
+
+.search {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  color: white;
+}
+
+.filter-dropdown {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+}
+
+.sort-checkbox {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 10px;
+}
+
+.wnakers {
+  /* background-color: red; */
+  width: 70vw;
+  display: flex;
+  justify-content: space-between;
+
+  flex-direction: row;
 }
