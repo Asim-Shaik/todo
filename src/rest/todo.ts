@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "./config";
 
-interface Todo {
+export interface Todo {
   _id: string;
   title: string;
   desc: string;
@@ -19,7 +19,7 @@ export const GetTodoData = async (id: string): Promise<AxiosResponse<Todo>> => {
 };
 
 export const AddTodo = async (
-  payload: Omit<Todo, "_id, createdAt">
+  payload: Omit<Todo, "_id" | "createdAt">
 ): Promise<AxiosResponse<Todo>> => {
   const url = `/todos`;
   return await axiosInstance.post<Todo>(url, payload);

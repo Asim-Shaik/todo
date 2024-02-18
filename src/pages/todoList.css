@@ -96,10 +96,26 @@
 }
 
 .wnakers {
-  /* background-color: red; */
-  width: 70vw;
+  width: 70%; /* Set width to 100% for responsiveness */
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-between; /* Center items with equal spacing */
+}
 
-  flex-direction: row;
+.wnakers > div {
+  margin: 5px; /* Add some margin between items */
+  flex: 1; /* Each item occupies equal space */
+}
+
+.search,
+.filter-dropdown,
+.sort-label {
+  width: 100%; /* Make inputs and labels take full width of their container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+@media screen and (max-width: 600px) {
+  .wnakers > div {
+    flex-basis: 100%; /* Each item takes full width on smaller screens */
+  }
 }
