@@ -1,31 +1,39 @@
 import { useEffect, useState } from "react";
 import "./addOrEdit.css";
 import { BsFillCheckCircleFill, BsCheckCircle } from "react-icons/bs";
+import { Todo } from "../../rest/todo";
 
-const AddOrEditTodo = ({ onAdd, mode, data }) => {
+interface Props {
+  onAdd: (title: string, desc: string, completed: boolean) => void;
+  mode: "add" | "edit";
+  data?: Todo;
+}
+
+const AddOrEditTodo: React.FC<Props> = ({ onAdd, mode, data }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-    setTitle(data.title);
-    setDesc(data.desc);
-    setCompleted(data.completed);
+    if (data) {
+      setTitle(data.title);
+      setDesc(data.desc);
+      setCompleted(data.completed);
+    }
   }, [data]);
 
-  const handleClickInside = (e) => {
+  const handleClickInside = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
-  const handleDescChange = (e) => {
+  const handleDescChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDesc(e.target.value);
   };
-
-  const handleCompletedChange = (e) => {
+  const handleCompletedChange = () => {
     setCompleted(!completed);
   };
   const handleSubmit = () => {

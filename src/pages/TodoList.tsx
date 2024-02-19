@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
-import { AddTodo, EditTodo, GetTodoData, GetTodos } from "../rest/todo";
+import { MouseEventHandler, useEffect, useState } from "react";
+import {
+  AddTodo,
+  EditTodo,
+  GetTodoData,
+  GetTodos,
+  Todo as todos,
+} from "../rest/todo";
 import Todo from "../components/Todo";
 import "./todoList.css";
 import AddOrEditTodo from "../components/AddOrEditTodo/AddOrEditTodo";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<todos[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [operation, setOperation] = useState("add");
+  const [operation, setOperation] = useState<"add" | "edit">("add");
   const [selectedId, setId] = useState("");
-  const [todoData, setTodoData] = useState({
+  const [todoData, setTodoData] = useState<todos>({
+    _id: "",
     title: "",
     desc: "",
     completed: false,
@@ -29,7 +36,7 @@ const TodoList = () => {
     getList();
   }, []);
 
-  const handleClickInside = (e) => {
+  const handleClickInside: MouseEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation();
   };
 
@@ -55,6 +62,7 @@ const TodoList = () => {
     setId(id);
     const response = await GetTodoData(id);
     setTodoData({
+      _id: id,
       title: response.data.todo.title,
       desc: response.data.todo.desc,
       completed: response.data.todo.completed,
@@ -71,16 +79,16 @@ const TodoList = () => {
     setTodos(response.data.todos);
   };
 
-  const filteredTodos = todos
+  const filteredTodos: todos[] = todos
     .filter(
       (todo) =>
         (filterCompleted === "all" ||
           todo.completed === (filterCompleted === "completed")) &&
         todo.title.toLowerCase().includes(searchQuery.toLowerCase())
     )
-    .sort((a, b) => {
+    .sort((a: todos, b: todos) => {
       if (sortByCompleted) {
-        return a.completed - b.completed;
+        return a.completed ? 1 : -1;
       } else {
         return a.title.localeCompare(b.title);
       }
@@ -141,6 +149,7 @@ const TodoList = () => {
             setShowModal(true);
             setOperation("add");
             setTodoData({
+              _id: "",
               title: "",
               desc: "",
               completed: false,

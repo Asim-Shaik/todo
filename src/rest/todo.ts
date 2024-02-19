@@ -8,14 +8,24 @@ export interface Todo {
   completed: boolean;
 }
 
-export const GetTodos = async (): Promise<AxiosResponse<Todo[]>> => {
+interface ApiResponse {
+  todos: Todo[]; // Ensure the response has a property 'todos' containing an array of Todo objects
+}
+
+interface GetSingleResponse {
+  todo: Todo; // Ensure the response has a property 'todos' containing an array of Todo objects
+}
+
+export const GetTodos = async (): Promise<AxiosResponse<ApiResponse>> => {
   const url = `/todos`;
-  return await axiosInstance.get<Todo[]>(url);
+  return await axiosInstance.get<ApiResponse>(url);
 };
 
-export const GetTodoData = async (id: string): Promise<AxiosResponse<Todo>> => {
+export const GetTodoData = async (
+  id: string
+): Promise<AxiosResponse<GetSingleResponse>> => {
   const url = `/todos/${id}`;
-  return await axiosInstance.get<Todo>(url);
+  return await axiosInstance.get<GetSingleResponse>(url);
 };
 
 export const AddTodo = async (

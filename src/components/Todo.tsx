@@ -1,7 +1,16 @@
+import { Todo as todo } from "../rest/todo";
 import styles from "./todo.module.css";
 import { BsCheckCircle, BsFillCheckCircleFill } from "react-icons/bs";
 
-const Todo = ({ todo, onView, onComplete }) => {
+const Todo = ({
+  todo,
+  onView,
+  onComplete,
+}: {
+  todo: todo;
+  onView: (id: string) => void;
+  onComplete: (id: string, completed: boolean) => void;
+}) => {
   return (
     <div className={styles.todo}>
       <button
